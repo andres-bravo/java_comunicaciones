@@ -12,7 +12,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		//Si no pongo nada utiliza puerto y recurso por defecto.
-		String dir="http://10.1.1.100:8080/servicio_contactos/Contactos";
+		String dir="https://www.google.es";
 		try {
 			URL url = new URL(dir);
 			URLConnection con=url.openConnection();
