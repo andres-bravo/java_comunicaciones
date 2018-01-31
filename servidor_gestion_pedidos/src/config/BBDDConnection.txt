@@ -1,0 +1,3 @@
+conexion|jdbc:mysql://localhost:3306/bancabd
+user|root
+pwd|root
