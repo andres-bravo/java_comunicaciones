@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -33,7 +34,10 @@ public class HiloAltaPedidos implements Runnable{
 				JSONParser parser = new JSONParser();
 				JSONObject jpedido = (JSONObject)parser.parse(new InputStreamReader(is));
 				//recogemos contacto
+				Pedido p = new Pedido(0,jpedido.get("producto").toString(),Integer.parseInt(jpedido.get("unidades").toString()),
+						sc.getInetAddress().getHostAddress(), LocalDateTime.parse(jpedido.get("fecha").toString()));
 				GestionPedidos pedidos=new GestionPedidos();
+			
 				pedidos.grabarPedido(p);
 			}
 		}
