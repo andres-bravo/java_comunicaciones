@@ -13,6 +13,8 @@ public class Cliente {
 	public static void main(String[] args) {
 		//Datos del servidor
 		String ip="10.1.1.41";
+		//Servidor del profesor
+		//String ip="10.1.1.100";
 		int puerto= 9000;
 		try {
 			//Conexión
