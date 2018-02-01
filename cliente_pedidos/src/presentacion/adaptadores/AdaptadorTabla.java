@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import beans.Contacto;
+import beans.Pedido;
 
 public class AdaptadorTabla extends AbstractTableModel {
 	
-	List<Contacto> contactos;
-	public AdaptadorTabla(List<Contacto> contactos) {
-		this.contactos=contactos;
+	List<Pedido> pedidos;
+	public AdaptadorTabla(List<Pedido> pedidos) {
+		this.pedidos=pedidos;
 	}
 	
 
@@ -23,7 +23,7 @@ public class AdaptadorTabla extends AbstractTableModel {
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
-		return contactos.size();
+		return pedidos.size();
 	}
 
 	@Override
@@ -31,14 +31,17 @@ public class AdaptadorTabla extends AbstractTableModel {
 		String valor="";
 		switch(col){
 			case 0:
-				valor=contactos.get(fila).getNombre();
+				valor=pedidos.get(fila).getProducto();
 				break;
 			case 1:
-				valor=contactos.get(fila).getEmail();
+				valor=String.valueOf(pedidos.get(fila).getUnidades());
 				break;
 			case 2:
-				valor=String.valueOf(contactos.get(fila).getTelefono());
+				valor=String.valueOf(pedidos.get(fila).getIpCliente());
 				break;
+			case 3:
+				valor=String.valueOf(pedidos.get(fila).getFecha());
+				break;			
 		}
 		
 		
@@ -50,13 +53,16 @@ public class AdaptadorTabla extends AbstractTableModel {
 		String nombre="";
 		switch(arg0) {
 			case 0:
-				nombre="Nombre";
+				nombre="Producto";
 				break;
 			case 1:
-				nombre="Email";
+				nombre="Unidades";
 				break;
 			case 2:
-				nombre="Teléfono";
+				nombre="IpCliente";
+				break;
+			case 3:
+				nombre="Fecha";
 				break;
 		}
 		return nombre;

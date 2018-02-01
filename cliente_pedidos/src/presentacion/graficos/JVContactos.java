@@ -10,10 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import beans.Contacto;
+import beans.Pedido;
 import comunicaciones.ClientePedidos;
 import presentacion.adaptadores.AdaptadorTabla;
 
@@ -21,7 +20,6 @@ public class JVContactos extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tbContactos;
-	private JTextField textContacto;
 
 	/**
 	 * Launch the application.
@@ -66,28 +64,20 @@ public class JVContactos extends JFrame {
 		tbContactos = new JTable();
 		scrollPane.setViewportView(tbContactos);
 		
-
-		
-		textContacto = new JTextField();
-		textContacto.setBounds(10, 11, 86, 20);
-		contentPane.add(textContacto);
-		textContacto.setColumns(10);
-		
-		JButton btnBuscarContactos = new JButton("Buscar Contactos");
-		btnBuscarContactos.addActionListener(new ActionListener() {
+		JButton btnBuscarPedidos = new JButton("Buscar Pedidos");
+		btnBuscarPedidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//carga del JTable
 				//GestionAgenda agenda=new GestionAgenda();
-				ClientePedidos agenda = new ClientePedidos();
-				String cad=textContacto.getText();
-				List<Contacto> contactos=agenda.recuperarTodos(cad);
+				ClientePedidos gestpedidos = new ClientePedidos();
+				List<Pedido> pedidos=gestpedidos.recuperarTodos();
 				//creamos objeto adaptador
-				AdaptadorTabla adp=new AdaptadorTabla(contactos);
+				AdaptadorTabla adp=new AdaptadorTabla(pedidos);
 				tbContactos.setModel(adp);
 			}
 		});
-		btnBuscarContactos.setBounds(102, 10, 127, 23);
-		contentPane.add(btnBuscarContactos);
+		btnBuscarPedidos.setBounds(10, 11, 127, 23);
+		contentPane.add(btnBuscarPedidos);
 		
 		this.setVisible(true);
 	}

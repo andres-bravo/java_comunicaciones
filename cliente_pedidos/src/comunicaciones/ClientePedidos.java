@@ -23,12 +23,12 @@ public class ClientePedidos {
 	public List<Pedido> recuperarTodos() {
 
 		ArrayList<Pedido> pedidos=new ArrayList<>();
-		//Datos del servidor
-		//String ip="10.1.1.41";
+		//Datos del servidor clase
+		String ip="10.1.1.41";
 		//Servidor del profesor
 		//String ip="10.1.1.100";
 		//Ip casa
-		String ip="192.168.1.63";
+		//String ip="192.168.1.63";
 		int puerto= 9000;
 		try {
 			//Conexion
@@ -36,28 +36,27 @@ public class ClientePedidos {
 			//Socket establecido ahora enviar y recibir getInputStream, getOutputStream
 			InputStream is = sc.getInputStream();
 			OutputStream os=sc.getOutputStream();
-			
-			try(PrintStream salida = new PrintStream(os);BufferedReader bf = new BufferedReader(new InputStreamReader(is));){
-				//Envio de datos
-				salida.println("Buscar Pedidos");
-				//Cojo la respuesta directamente the InputStreamReader y la muestro
-				//System.out.println(bf.readLine());
-				JSONParser parser = new JSONParser();
-				JSONArray array =(JSONArray)parser.parse(bf.readLine());
-				//JSONArray array =(JSONArray)parser.parse(new InputStreamReader(is));
-				//Recorremos el array JSON y mostramos los nombres de los contactos
-				for(Object ob:array) {
-					JSONObject jpedido=(JSONObject)ob;
-					System.out.println(jpedido.get("producto").toString()+" | "+Integer.parseInt(jpedido.get("unidades").toString())+
+			//No necesito el BufferedReader ya que JSONParser y JSONArray aceptan InputStremReader
+			//try(PrintStream salida = new PrintStream(os);BufferedReader bf = new BufferedReader(new InputStreamReader(is));){
+			//Envio de datos
+			PrintStream salida = new PrintStream(os);	
+			salida.println("Buscar Pedidos");
+			//Cojo la respuesta directamente the InputStreamReader y la muestro
+			JSONParser parser = new JSONParser();
+			JSONArray array =(JSONArray)parser.parse(new InputStreamReader(is));
+			//Recorremos el array JSON y mostramos los nombres de los contactos
+			for(Object ob:array) {
+				JSONObject jpedido=(JSONObject)ob;
+				System.out.println(jpedido.get("producto").toString()+" | "+Integer.parseInt(jpedido.get("unidades").toString())+
 							" | " + jpedido.get("ipCliente").toString() + " | " + LocalDateTime.parse(jpedido.get("fecha").toString()));
-					/*
-					Pedido p = new Pedido(0,jpedido.get("producto").toString(),Integer.parseInt(jpedido.get("unidades").toString()),
-							jpedido.get("ipCliente").toString(), LocalDateTime.parse(jpedido.get("fecha").toString()));
-					pedidos.add(p);
-					*/
+				/*
+				Pedido p = new Pedido(0,jpedido.get("producto").toString(),Integer.parseInt(jpedido.get("unidades").toString()),
+						jpedido.get("ipCliente").toString(), LocalDateTime.parse(jpedido.get("fecha").toString()));
+				pedidos.add(p);
+				*/
 					
-				}			
-			}
+			}			
+		//} //Antiguo cierre del try con recursos
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();
@@ -69,10 +68,16 @@ public class ClientePedidos {
 	}
 	
 	public void altaPedido(Pedido p) {
-		String ip="192.168.1.63";
+		//Datos del servidor clase
+		String ip="10.1.1.41";
+		//Servidor del profesor
+		//String ip="10.1.1.100";
+		//Ip casa
+		//String ip="192.168.1.63";
 		int puerto= 8000;
 		try {
 			//Conexion
+			System.out.println("Lanzo conexion.");
 			Socket sc= new Socket(ip,puerto);
 			//Socket establecido ahora enviar y recibir getInputStream, getOutputStream
 			InputStream is = sc.getInputStream();
