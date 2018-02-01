@@ -19,9 +19,9 @@ public class GestionPedidos {
 	private String cadena,user,pwd;
 	public GestionPedidos() {
 		//Ruta clase
-		//String fichero = "D:\\manana\\AndresBravo\\comunicaciones\\servidor_gestion_pedidos\\src\\config\\BBDDConnection.txt";
+		String fichero = "D:\\manana\\AndresBravo\\git_comunicaciones\\servidor_gestion_pedidos\\src\\config\\BBDDConnection.txt";
 		//Ruta casa
-		String fichero = "/Users/abravo/git/java_comunicaciones/servidor_gestion_pedidos/src/config/BBDDConnection.txt";
+		//String fichero = "/Users/abravo/git/java_comunicaciones/servidor_gestion_pedidos/src/config/BBDDConnection.txt";
 		try(FileReader fr = new FileReader(fichero);
 				BufferedReader bf = new BufferedReader(fr)) {
 			//Manera Cl�sica

@@ -29,17 +29,19 @@ public class HiloAltaPedidos implements Runnable{
 			//crear canales entrada/salida
 			InputStream is=sc.getInputStream();
 			OutputStream os=sc.getOutputStream();
-			try(PrintStream salida=new PrintStream(os);BufferedReader bf=new BufferedReader(new InputStreamReader(is));){
-				//Recuperamos el objeto JSON
-				JSONParser parser = new JSONParser();
-				JSONObject jpedido = (JSONObject)parser.parse(new InputStreamReader(is));
-				//recogemos contacto
-				Pedido p = new Pedido(0,jpedido.get("producto").toString(),Integer.parseInt(jpedido.get("unidades").toString()),
-						sc.getInetAddress().getHostAddress(), LocalDateTime.parse(jpedido.get("fecha").toString()));
-				GestionPedidos pedidos=new GestionPedidos();
+			//No nos haria falta el BufferedReader porque leo directamente del InputStream
+			//try(PrintStream salida=new PrintStream(os);BufferedReader bf=new BufferedReader(new InputStreamReader(is));){
+			//Recuperamos el objeto JSON
 			
-				pedidos.grabarPedido(p);
-			}
+			JSONParser parser = new JSONParser();
+			JSONObject jpedido = (JSONObject)parser.parse(new InputStreamReader(is));
+			//recogemos contacto
+			Pedido p = new Pedido(0,jpedido.get("producto").toString(),Integer.parseInt(jpedido.get("unidades").toString()),
+						sc.getInetAddress().getHostAddress(), LocalDateTime.parse(jpedido.get("fecha").toString()));
+			GestionPedidos pedidos=new GestionPedidos();
+			
+			pedidos.grabarPedido(p);
+			//}
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
