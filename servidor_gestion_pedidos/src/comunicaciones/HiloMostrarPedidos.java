@@ -27,8 +27,6 @@ public class HiloMostrarPedidos implements Runnable {
 			InputStream is=sc.getInputStream();
 			OutputStream os=sc.getOutputStream();
 			try(PrintStream salida=new PrintStream(os);BufferedReader bf=new BufferedReader(new InputStreamReader(is));){
-				//recuperamos la cadena de búsqueda
-				String cad=bf.readLine();
 				//recogemos contactos
 				GestionPedidos pedidos=new GestionPedidos();
 				List<Pedido> lped=pedidos.recuperarPedidos();
@@ -59,7 +57,7 @@ public class HiloMostrarPedidos implements Runnable {
 			ob.put("producto", p.getProducto());
 			ob.put("unidades",p.getUnidades());
 			ob.put("ipCliente", p.getIpCliente());
-			ob.put("fecha", p.getFecha());
+			ob.put("fecha", p.getFecha().toString());
 			array.add(ob);
 		});
 		return array.toJSONString();

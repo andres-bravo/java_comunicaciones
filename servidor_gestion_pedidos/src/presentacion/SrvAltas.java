@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import comunicaciones.HiloMostrarPedidos;
+import comunicaciones.HiloAltaPedidos;
 
 public class SrvAltas {
 
@@ -18,6 +18,7 @@ public class SrvAltas {
 				System.out.println("Servidor Altas esperando llamadas...");
 				Socket sc=serv.accept();
 				System.out.println("Llamada recibida..."+sc.getInetAddress().getHostAddress());
+				es.submit(new HiloAltaPedidos(sc));
 				//es.submit(new HiloMostrarPedidos(sc));			
 			}
 			
