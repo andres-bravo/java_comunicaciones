@@ -30,7 +30,7 @@ public class GestionPedidos {
 				ob.put("producto", producto);
 				ob.put("unidades", unidades);
 				salida.println(ob.toJSONString());
-				salida.flush();
+				//salida.flush();
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
